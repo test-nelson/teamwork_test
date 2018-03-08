@@ -30,4 +30,12 @@ public class ProjectListPresenter {
     public void onViewDestroyed() {
         realm.close();
     }
+
+    public void onSwipeToRefresh() {
+        repository.downloadProjects();
+    }
+
+    public void onProjectsUpdated() {
+        view.stopRefreshing();
+    }
 }

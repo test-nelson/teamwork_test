@@ -5,6 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import test.nelson.teamwork.R;
@@ -19,20 +22,55 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    public void setUpList(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+    @Nullable
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    EventBus eventBus = EventBus.getDefault();
+
+    public void setUpList(RecyclerView.Adapter adapter) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        if (swipeRefreshLayout != null)
-            swipeRefreshLayout.setOnRefreshListener(this);
-        setUpList(recyclerView, layoutManager, adapter);
+        setUpList(layoutManager, adapter);
     }
 
-    public void setUpList(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, RecyclerView.Adapter adapter) {
+
+    public void setUpList(RecyclerView.LayoutManager layoutManager, RecyclerView.Adapter adapter) {
+        setupSwipeToRefresh();
+        if (recyclerView == null) return;
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
 
+    private void setupSwipeToRefresh() {
+        if (swipeRefreshLayout != null)
+            swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    //Temporary workaround
+    public void disableDefaultRecyclerViewAnimations() {
+        if (recyclerView == null) return;
+        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
+        if (animator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
+    }
+
+
     @Override
     public void onRefresh() {
 
+    }
+
+    public void stopRefreshing() {
+        setRefreshing(false);
+    }
+
+    public void startRefreshing() {
+        setRefreshing(true);
+    }
+
+    private void setRefreshing(boolean refreshing) {
+        if (swipeRefreshLayout != null)
+            swipeRefreshLayout.setRefreshing(refreshing);
     }
 }

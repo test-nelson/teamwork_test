@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by nelsonnwezeaku on 3/7/18.
@@ -45,4 +46,7 @@ public class Project extends RealmObject {
 
     @SerializedName("endDate")
     String endDate;
+
+    @Setter
+    boolean isExpanded;
 }

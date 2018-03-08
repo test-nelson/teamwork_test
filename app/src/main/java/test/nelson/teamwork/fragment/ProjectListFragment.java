@@ -5,30 +5,28 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.BindView;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import io.realm.RealmResults;
 import test.nelson.teamwork.R;
 import test.nelson.teamwork.adapter.ProjectListAdapter;
 import test.nelson.teamwork.contracts.ProjectListView;
 import test.nelson.teamwork.model.Project;
+import test.nelson.teamwork.model.ProjectsUpdatedEvent;
 import test.nelson.teamwork.presenter.ProjectListPresenter;
+import test.nelson.teamwork.utils.CustomLinearLayoutManager;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProjectListFragment extends BaseFragment implements ProjectListView {
 
-    @BindView(R.id.recycler_view)
-    RecyclerView projectList;
-
-    private ProjectListAdapter adapter;
 
     private ProjectListPresenter presenter;
 
@@ -43,6 +41,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         ButterKnife.bind(this, view);
+        startRefreshing();
         presenter = new ProjectListPresenter(this);
 
 
@@ -51,9 +50,27 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
 
 
     @Override
+    public void onStart() {
+        super.onStart();
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        eventBus.unregister(this);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.onViewCreated();
+    }
+
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+        presenter.onSwipeToRefresh();
     }
 
     @Override
@@ -64,7 +81,17 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
 
     @Override
     public void setProjects(RealmResults<Project> projects) {
-        adapter = new ProjectListAdapter(projects);
-        setUpList(projectList, adapter);
+        ProjectListAdapter adapter = new ProjectListAdapter(projects);
+        setUpList(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), adapter);
+        disableDefaultRecyclerViewAnimations();
+
     }
+
+
+    @Subscribe
+    public void onProjectsUpdatedEvent(ProjectsUpdatedEvent event) {
+        presenter.onProjectsUpdated();
+    }
+
+
 }

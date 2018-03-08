@@ -9,4 +9,6 @@ import test.nelson.teamwork.model.Project;
 
 public interface ProjectListView {
     void setProjects(RealmResults<Project> projects);
+
+    void stopRefreshing();
 }

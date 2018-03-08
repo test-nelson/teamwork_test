@@ -10,10 +10,11 @@ import android.util.DisplayMetrics;
 /**
  * Created by nelsonnwezeaku on 3/8/18.
  */
-public class SmoothScrollLinearLayoutManager extends LinearLayoutManager {
+//Work around to provide smooth scroll to position with offset in LinearLayoutManager
+public class CustomLinearLayoutManager extends LinearLayoutManager {
     private static final float MILLISECONDS_PER_INCH = 110f;
 
-    public SmoothScrollLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
+    public CustomLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 
@@ -26,7 +27,7 @@ public class SmoothScrollLinearLayoutManager extends LinearLayoutManager {
             public PointF computeScrollVectorForPosition(int targetPosition) {
                 return new PointF(0, 1);
             }
-            
+
             @Override
             protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
                 return MILLISECONDS_PER_INCH / displayMetrics.densityDpi;
@@ -45,7 +46,7 @@ public class SmoothScrollLinearLayoutManager extends LinearLayoutManager {
 
         @Override
         public PointF computeScrollVectorForPosition(int targetPosition) {
-            return SmoothScrollLinearLayoutManager.this
+            return CustomLinearLayoutManager.this
                     .computeScrollVectorForPosition(targetPosition);
         }
 
