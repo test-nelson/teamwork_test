@@ -64,7 +64,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.16.18'
     annotationProcessor "org.projectlombok:lombok:1.16.18"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
-    
 
 
 }

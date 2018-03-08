@@ -11,4 +11,6 @@ public interface ProjectListView {
     void setProjects(RealmResults<Project> projects);
 
     void stopRefreshing();
+
+    void openProjectDetailFragment(long id);
 }

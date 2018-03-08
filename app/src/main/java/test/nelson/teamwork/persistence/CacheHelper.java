@@ -22,6 +22,11 @@ public class CacheHelper {
         return realm.where(Project.class).findAll();
     }
 
+    public Project getProject(Realm realm, long projectId) {
+        return realm.where(Project.class).equalTo("id", projectId).findFirst();
+
+    }
+
     public void saveProjects(final List<Project> projects) {
 
         executeTransactionAndClose(new Transaction() {
@@ -44,4 +49,6 @@ public class CacheHelper {
                 realm.close();
         }
     }
+
+
 }

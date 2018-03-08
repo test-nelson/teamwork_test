@@ -6,10 +6,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
+import android.support.v7.widget.Toolbar;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
+import test.nelson.teamwork.BaseActivity;
 import test.nelson.teamwork.R;
 
 /**
@@ -25,6 +27,10 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     @Nullable
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @Nullable
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     EventBus eventBus = EventBus.getDefault();
 
@@ -55,6 +61,17 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
         }
     }
 
+    BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
+
+
+    public void setupToolbarWithTitle(String title) {
+        if (toolbar == null) return;
+        getBaseActivity().setSupportActionBar(toolbar);
+        getBaseActivity().getSupportActionBar().setTitle(title);
+
+    }
 
     @Override
     public void onRefresh() {

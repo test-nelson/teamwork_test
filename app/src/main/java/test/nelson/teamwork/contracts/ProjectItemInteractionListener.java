@@ -9,4 +9,6 @@ public interface ProjectItemInteractionListener {
     boolean isExpanded(int adapterPosition);
 
     void onCompleteExpansion(int adapterPosition);
+
+    void onProjectSelected(int adapterPosition);
 }

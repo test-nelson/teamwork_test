@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashSet;
 
 import butterknife.BindView;
@@ -21,6 +23,7 @@ import io.realm.RealmRecyclerViewAdapter;
 import test.nelson.teamwork.R;
 import test.nelson.teamwork.contracts.ProjectItemInteractionListener;
 import test.nelson.teamwork.model.Project;
+import test.nelson.teamwork.model.ProjectSelectedEvent;
 import test.nelson.teamwork.utils.CustomLinearLayoutManager;
 
 /**
@@ -93,7 +96,14 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         }
     }
 
-    static class ProjectItemViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onProjectSelected(int adapterPosition) {
+        final Project project = getItem(adapterPosition);
+        if (project != null)
+            EventBus.getDefault().post(new ProjectSelectedEvent(project.getId()));
+    }
+
+    static class ProjectItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.text_view_item_project_view_holder_project_name)
         TextView projectName;
@@ -112,6 +122,7 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         ProjectItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         private void bindProjectInformation(Project project) {
@@ -123,6 +134,7 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
                     .into(projectLogo);
 
             setExpandState();
+
 
         }
 
@@ -148,6 +160,11 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
 
         void setInteractionListener(ProjectItemInteractionListener interactionListener) {
             this.interactionListener = interactionListener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            interactionListener.onProjectSelected(getAdapterPosition());
         }
     }
 

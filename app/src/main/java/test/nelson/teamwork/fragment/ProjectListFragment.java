@@ -18,6 +18,7 @@ import test.nelson.teamwork.R;
 import test.nelson.teamwork.adapter.ProjectListAdapter;
 import test.nelson.teamwork.contracts.ProjectListView;
 import test.nelson.teamwork.model.Project;
+import test.nelson.teamwork.model.ProjectSelectedEvent;
 import test.nelson.teamwork.model.ProjectsUpdatedEvent;
 import test.nelson.teamwork.presenter.ProjectListPresenter;
 import test.nelson.teamwork.utils.CustomLinearLayoutManager;
@@ -43,6 +44,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         ButterKnife.bind(this, view);
         startRefreshing();
         presenter = new ProjectListPresenter(this);
+        setupToolbarWithTitle("Projects");
 
 
         return view;
@@ -87,6 +89,16 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
 
     }
 
+    @Override
+    public void openProjectDetailFragment(long id) {
+        getBaseActivity().addFragment(ProjectDetailFragment.getInstance(id));
+    }
+
+    @Subscribe
+    public void onProjectSelectedEvent(ProjectSelectedEvent event) {
+
+        presenter.onProjectSelectedEvent(event);
+    }
 
     @Subscribe
     public void onProjectsUpdatedEvent(ProjectsUpdatedEvent event) {

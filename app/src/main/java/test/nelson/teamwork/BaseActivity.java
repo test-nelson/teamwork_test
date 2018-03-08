@@ -21,9 +21,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    public void addFragment(Fragment fragment, int enterRight, int exitLeft, int enterLeft, int exitRight) {
+    public void addFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(enterRight, exitLeft, enterLeft, exitRight);
         transaction.add(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
