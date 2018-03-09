@@ -37,6 +37,8 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
     ImageView projectLogo;
     @BindView(R.id.text_view_fragment_project_detail_project_description)
     TextView projectDescription;
+    @BindView(R.id.view_group_fragment_project_detail_project_misc_settings)
+    View miscSettings;
 
     private boolean starred;
 
@@ -67,6 +69,12 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
         else
             starButton.setImageResource(R.drawable.ic_star_border_black_24dp);
 
+    }
+
+    @OnClick(R.id.button_fragment_project_detail_show_project_misc_settings)
+    public void onExpandProjectMiscSettingsClicked(View view) {
+        miscSettings.setVisibility(View.VISIBLE);
+        view.setVisibility(View.GONE);
     }
 
     @Override
