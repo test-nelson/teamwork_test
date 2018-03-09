@@ -122,12 +122,13 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/text_view_fragment_project_detail_project_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                android:text="Teamwork Inc"
+                tools:text="Teamwork Inc"
                 android:textColor="#aa000000"
                 android:textSize="12sp" />
 
@@ -144,12 +145,13 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/text_view_fragment_project_detail_created"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                android:text="11 January 2013"
+                tools:text="11 January 2013"
                 android:textColor="#aa000000"
                 android:textSize="12sp" />
 
@@ -166,12 +168,13 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/text_view_fragment_project_detail_last_modified"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                android:text="12 August 2017"
+                tools:text="12 August 2017"
                 android:textColor="#aa000000"
                 android:textSize="12sp" />
 
@@ -187,12 +190,13 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/text_view_fragment_project_detail_period"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                android:text="12 July 2017 - 30 April 2018"
+                tools:text="12 July 2017 - 30 April 2018"
                 android:textColor="#aa000000"
                 android:textSize="12sp" />
 

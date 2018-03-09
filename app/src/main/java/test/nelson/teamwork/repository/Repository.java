@@ -4,6 +4,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import test.nelson.teamwork.model.ProjectListResponse;
+import test.nelson.teamwork.model.StarProjectStatus;
 import test.nelson.teamwork.net.ApiService;
 import test.nelson.teamwork.persistence.CacheHelper;
 import test.nelson.teamwork.utils.Config;
@@ -54,5 +55,56 @@ public class Repository {
             }
         });
 
+    }
+
+
+
+    public void starProject(long projectId) {
+        apiService.starProject(projectId, new Observer<StarProjectStatus>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(StarProjectStatus starProjectStatus) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+    public void unStarProject(long projectId) {
+        apiService.unStarProject(projectId, new Observer<StarProjectStatus>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(StarProjectStatus starProjectStatus) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }

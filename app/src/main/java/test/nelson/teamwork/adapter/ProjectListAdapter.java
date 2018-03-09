@@ -32,7 +32,6 @@ import test.nelson.teamwork.utils.CustomLinearLayoutManager;
 
 public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, ProjectListAdapter.ProjectItemViewHolder> implements ProjectItemInteractionListener {
 
-    //A hack. Quick fix for an issue with realm which will never be used in production code
     private HashSet<Integer> expandedIndices = new HashSet<>();
     private RecyclerView recyclerView;
 
@@ -115,6 +114,8 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         TextView projectSubtitle;
         @BindView(R.id.image_view_item_project_view_holder_expand_button)
         ImageView expandButton;
+        @BindView(R.id.image_view_item_project_view_holder_star_button)
+        ImageView starButton;
 
         private ProjectItemInteractionListener interactionListener;
 
@@ -132,6 +133,11 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
             Glide.with(itemView.getContext())
                     .load(project.getLogo())
                     .into(projectLogo);
+
+            if (project.isStarred())
+                starButton.setImageResource(R.drawable.ic_star_accent_24dp);
+            else starButton.setImageResource(R.drawable.ic_star_border_accent_24dp);
+
 
             setExpandState();
 

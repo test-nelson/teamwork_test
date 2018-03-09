@@ -54,7 +54,7 @@
 
 
             <ImageButton
-                android:id="@+id/button"
+                android:id="@+id/image_view_item_project_view_holder_star_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="32dp"
-                android:layout_toEndOf="@id/button"
+                android:layout_toEndOf="@id/image_view_item_project_view_holder_star_button"
                 android:alpha="0.5"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_delete_black_24dp" />

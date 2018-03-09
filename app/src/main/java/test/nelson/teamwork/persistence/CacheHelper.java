@@ -23,8 +23,10 @@ public class CacheHelper {
     }
 
     public Project getProject(Realm realm, long projectId) {
-        return realm.where(Project.class).equalTo("id", projectId).findFirst();
-
+        final Project project = realm.where(Project.class).equalTo("id", projectId).findFirst();
+        if (project != null)
+            return realm.copyFromRealm(project);
+        return null;
     }
 
     public void saveProjects(final List<Project> projects) {
@@ -51,4 +53,14 @@ public class CacheHelper {
     }
 
 
+    public void saveProject(final Project project) {
+
+        executeTransactionAndClose(new Transaction() {
+            @Override
+            public void execute(@NonNull Realm realm) {
+                realm.copyToRealmOrUpdate(project);
+                EventBus.getDefault().post(new ProjectsUpdatedEvent());
+            }
+        });
+    }
 }
