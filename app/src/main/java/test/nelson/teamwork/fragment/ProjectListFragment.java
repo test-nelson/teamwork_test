@@ -29,12 +29,16 @@ import test.nelson.teamwork.utils.CustomLinearLayoutManager;
 public class ProjectListFragment extends BaseFragment implements ProjectListView {
 
 
-    private ProjectListPresenter presenter;
+    private ProjectListPresenter presenter = new ProjectListPresenter();
 
     public ProjectListFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -42,8 +46,6 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         ButterKnife.bind(this, view);
-        startRefreshing();
-        presenter = new ProjectListPresenter(this);
         setupToolbarWithTitle("Projects");
 
 
@@ -66,7 +68,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.onViewCreated();
+        presenter.onViewCreated(this);
     }
 
     @Override
@@ -90,8 +92,8 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     }
 
     @Override
-    public void openProjectDetailFragment(long id) {
-        getBaseActivity().addFragment(ProjectDetailFragment.getInstance(id));
+    public void openProjectDetailFragment(ProjectSelectedEvent event) {
+        getBaseActivity().openProjectDetailFragment(this, event);
     }
 
     @Subscribe

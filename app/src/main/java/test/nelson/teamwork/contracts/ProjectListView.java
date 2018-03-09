@@ -2,6 +2,7 @@ package test.nelson.teamwork.contracts;
 
 import io.realm.RealmResults;
 import test.nelson.teamwork.model.Project;
+import test.nelson.teamwork.model.ProjectSelectedEvent;
 
 /**
  * Created by nelsonnwezeaku on 3/7/18.
@@ -12,5 +13,7 @@ public interface ProjectListView {
 
     void stopRefreshing();
 
-    void openProjectDetailFragment(long id);
+    void openProjectDetailFragment(ProjectSelectedEvent id);
+
+    void startRefreshing();
 }

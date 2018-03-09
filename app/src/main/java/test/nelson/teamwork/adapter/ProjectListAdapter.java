@@ -1,5 +1,6 @@
 package test.nelson.teamwork.adapter;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -99,14 +100,14 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
     public void onProjectSelected(int adapterPosition) {
         final Project project = getItem(adapterPosition);
         if (project != null)
-            EventBus.getDefault().post(new ProjectSelectedEvent(project.getId()));
+            EventBus.getDefault().post(new ProjectSelectedEvent(project.getId(), adapterPosition));
     }
 
     static class ProjectItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.text_view_item_project_view_holder_project_name)
         TextView projectName;
-        @BindView(R.id.image_view_item_project_view_holder_project_logo)
+        @BindView(R.id.project_logo)
         ImageView projectLogo;
         @BindView(R.id.text_view_item_project_view_holder_project_description)
         TextView projectDescription;
@@ -127,6 +128,13 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         }
 
         private void bindProjectInformation(Project project) {
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // the view being shared
+                projectLogo.setTransitionName("transition" + getAdapterPosition());
+            }
+
             projectName.setText(project.getName());
             projectSubtitle.setText(project.getCompany().getName());
             projectDescription.setText(project.getDescription());

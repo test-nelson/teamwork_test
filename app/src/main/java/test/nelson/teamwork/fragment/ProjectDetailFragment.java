@@ -1,6 +1,7 @@
 package test.nelson.teamwork.fragment;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.nelson.teamwork.R;
 import test.nelson.teamwork.contracts.ProjectDetailView;
+import test.nelson.teamwork.model.ProjectSelectedEvent;
 import test.nelson.teamwork.presenter.ProjectDetailPresenter;
 
 /**
@@ -28,12 +30,13 @@ import test.nelson.teamwork.presenter.ProjectDetailPresenter;
 public class ProjectDetailFragment extends BaseFragment implements ProjectDetailView {
 
     public static final String KEY_PROJECT_ID = "project_id";
+    public static final String SHARED_ELEMENT_POSITION = "shared_element_position";
     private ProjectDetailPresenter presenter;
     private long projectId;
 
     @BindView(R.id.fab_fragment_project_detail_star_button)
     FloatingActionButton starButton;
-    @BindView(R.id.image_view_fragment_project_detail_project_logo)
+    @BindView(R.id.project_logo)
     ImageView projectLogo;
     @BindView(R.id.text_view_fragment_project_detail_project_description)
     TextView projectDescription;
@@ -70,8 +73,13 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
         View view = inflater.inflate(R.layout.fragment_project_detail, container, false);
         ButterKnife.bind(this, view);
         presenter = new ProjectDetailPresenter(this);
-        if (getArguments() != null)
+        if (getArguments() != null) {
             projectId = getArguments().getLong(KEY_PROJECT_ID);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                projectLogo.setTransitionName("transition" + getArguments().getLong(SHARED_ELEMENT_POSITION));
+            }
+        }
 
 
         return view;
@@ -172,10 +180,12 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
     }
 
 
-    public static ProjectDetailFragment getInstance(long projectId) {
+    public static ProjectDetailFragment getInstance(ProjectSelectedEvent event) {
         ProjectDetailFragment fragment = new ProjectDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putLong(KEY_PROJECT_ID, projectId);
+        bundle.putLong(KEY_PROJECT_ID, event.getId());
+        bundle.putLong(SHARED_ELEMENT_POSITION, event.getAdapterPosition());
+
         fragment.setArguments(bundle);
         return fragment;
     }

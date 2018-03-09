@@ -25,7 +25,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/image_view_fragment_project_detail_project_logo"
+                android:id="@+id/project_logo"
                 android:layout_width="match_parent"
                 android:layout_height="232dp"
                 android:fitsSystemWindows="true"

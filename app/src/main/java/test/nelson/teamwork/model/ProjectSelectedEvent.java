@@ -8,8 +8,10 @@ import lombok.Getter;
 @Getter
 public class ProjectSelectedEvent {
     private long id;
+    private int adapterPosition;
 
-    public ProjectSelectedEvent(long projectId) {
+    public ProjectSelectedEvent(long projectId, int adapterPosition) {
         this.id = projectId;
+        this.adapterPosition = adapterPosition;
     }
 }
