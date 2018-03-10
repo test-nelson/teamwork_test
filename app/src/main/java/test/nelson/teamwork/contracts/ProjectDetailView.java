@@ -4,7 +4,7 @@ package test.nelson.teamwork.contracts;
  * Created by nelsonnwezeaku on 3/8/18.
  */
 
-public interface ProjectDetailView {
+public interface ProjectDetailView extends BaseView {
     long getProjectId();
 
     void setupToolbarWithTitle(String name);

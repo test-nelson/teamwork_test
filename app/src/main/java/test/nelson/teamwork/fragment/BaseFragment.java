@@ -1,12 +1,14 @@
 package test.nelson.teamwork.fragment;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,6 +33,9 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    Snackbar snackbar;
+
 
     EventBus eventBus = EventBus.getDefault();
 
@@ -78,6 +83,29 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
 
     }
 
+
+    public void onUnknownError(String message) {
+        showMessage(message);
+        onError();
+
+
+    }
+
+    public void onTimeout() {
+        showMessage("Network timeout");
+        onError();
+
+    }
+
+    public void onNetworkError() {
+        showMessage("Network Error");
+        onError();
+    }
+
+    public void onError() {
+    }
+
+
     public void stopRefreshing() {
         setRefreshing(false);
     }
@@ -89,5 +117,14 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     private void setRefreshing(boolean refreshing) {
         if (swipeRefreshLayout != null)
             swipeRefreshLayout.setRefreshing(refreshing);
+    }
+
+    public void showMessage(String message) {
+        if (snackbar != null)
+            snackbar.dismiss();
+        final View view = getView();
+        if (view != null)
+            snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }

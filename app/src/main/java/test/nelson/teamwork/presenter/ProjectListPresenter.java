@@ -15,13 +15,13 @@ public class ProjectListPresenter extends BasePresenter {
     private Realm realm;
 
 
-    public ProjectListPresenter() {
-        repository.downloadProjects();
+    public ProjectListPresenter(ProjectListView view) {
+        this.view = view;
+        repository.downloadProjects(view);
     }
 
 
-    public void onViewCreated(ProjectListView view) {
-        this.view = view;
+    public void onViewCreated() {
         realm = Realm.getDefaultInstance();
         final RealmResults<Project> projects = cacheHelper.getProjects(realm);
         if (projects.isEmpty())
@@ -35,7 +35,7 @@ public class ProjectListPresenter extends BasePresenter {
     }
 
     public void onSwipeToRefresh() {
-        repository.downloadProjects();
+        repository.downloadProjects(view);
     }
 
     public void onProjectsUpdated() {
@@ -49,5 +49,9 @@ public class ProjectListPresenter extends BasePresenter {
 
     public void onProjectSelectedEvent(ProjectSelectedEvent event) {
         view.openProjectDetailFragment(event.getId());
+    }
+
+    public void onNetworkError() {
+        onProjectsUpdated();
     }
 }

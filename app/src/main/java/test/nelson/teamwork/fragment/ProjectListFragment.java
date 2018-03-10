@@ -30,7 +30,7 @@ import test.nelson.teamwork.utils.CustomLinearLayoutManager;
 public class ProjectListFragment extends BaseFragment implements ProjectListView {
 
 
-    private ProjectListPresenter presenter = new ProjectListPresenter();
+    private ProjectListPresenter presenter = new ProjectListPresenter(this);
 
     @BindView(R.id.empty_projects_layout)
     View emptyProjectsLayout;
@@ -68,7 +68,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.onViewCreated(this);
+        presenter.onViewCreated();
     }
 
     @Override
@@ -108,6 +108,12 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         emptyProjectsLayout.setVisibility(View.GONE);
         if (recyclerView != null)
             recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onError() {
+        super.onError();
+        presenter.onNetworkError();
     }
 
     @Subscribe

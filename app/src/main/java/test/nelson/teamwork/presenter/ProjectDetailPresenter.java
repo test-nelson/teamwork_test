@@ -66,10 +66,10 @@ public class ProjectDetailPresenter extends BasePresenter {
         // TODO: 3/9/18 Not a good idea to send these requests every time. A better implementation will batch the requests and send later
         if (project.isStarred()) {
             view.starProject();
-            repository.starProject(project.getId());
+            repository.starProject(view, project.getId());
         } else {
             view.unstarProject();
-            repository.unStarProject(project.getId());
+            repository.unStarProject(view, project.getId());
         }
 
     }

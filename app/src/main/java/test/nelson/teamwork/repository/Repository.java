@@ -1,11 +1,10 @@
 package test.nelson.teamwork.repository;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+import test.nelson.teamwork.contracts.BaseView;
 import test.nelson.teamwork.model.ProjectListResponse;
 import test.nelson.teamwork.model.StarProjectStatus;
 import test.nelson.teamwork.net.ApiService;
+import test.nelson.teamwork.net.CallbackWrapper;
 import test.nelson.teamwork.persistence.CacheHelper;
 import test.nelson.teamwork.utils.Config;
 
@@ -17,7 +16,6 @@ import static test.nelson.teamwork.utils.Config.USER_NAME;
 
 public class Repository {
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private CacheHelper cacheHelper = new CacheHelper();
 
     private ApiService apiService;
@@ -27,82 +25,31 @@ public class Repository {
     }
 
 
-    public void downloadProjects() {
-        apiService.getProjects(new Observer<ProjectListResponse>() {
+    public void downloadProjects(BaseView view) {
+        apiService.getProjects(new CallbackWrapper<ProjectListResponse>(view) {
             @Override
-            public void onSubscribe(Disposable d) {
-                compositeDisposable.add(d);
-
-            }
-
-            @Override
-            public void onNext(ProjectListResponse response) {
+            protected void onSuccess(ProjectListResponse response) {
                 if ("OK".equals(response.getStatus()))
                     cacheHelper.saveProjects(response.getProjects());
-
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-
-            }
-
-            @Override
-            public void onComplete() {
-
             }
         });
 
     }
 
 
-
-    public void starProject(long projectId) {
-        apiService.starProject(projectId, new Observer<StarProjectStatus>() {
+    public void starProject(BaseView view, long projectId) {
+        apiService.starProject(projectId, new CallbackWrapper<StarProjectStatus>(view) {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(StarProjectStatus starProjectStatus) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-
-            }
-
-            @Override
-            public void onComplete() {
+            protected void onSuccess(StarProjectStatus starProjectStatus) {
 
             }
         });
     }
-    public void unStarProject(long projectId) {
-        apiService.unStarProject(projectId, new Observer<StarProjectStatus>() {
+
+    public void unStarProject(BaseView view, long projectId) {
+        apiService.unStarProject(projectId, new CallbackWrapper<StarProjectStatus>(view) {
             @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(StarProjectStatus starProjectStatus) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-
-            }
-
-            @Override
-            public void onComplete() {
+            protected void onSuccess(StarProjectStatus starProjectStatus) {
 
             }
         });

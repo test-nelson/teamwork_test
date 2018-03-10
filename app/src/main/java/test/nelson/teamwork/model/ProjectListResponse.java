@@ -10,7 +10,7 @@ import lombok.Getter;
  * Created by nelsonnwezeaku on 3/7/18.
  */
 @Getter
-public class ProjectListResponse {
+public class ProjectListResponse extends BaseResponse {
     @SerializedName("STATUS")
     String status;
     @SerializedName("projects")

@@ -7,7 +7,7 @@ import test.nelson.teamwork.model.Project;
  * Created by nelsonnwezeaku on 3/7/18.
  */
 
-public interface ProjectListView {
+public interface ProjectListView extends BaseView{
     void setProjects(RealmResults<Project> projects);
 
     void stopRefreshing();
