@@ -1,5 +1,7 @@
 package test.nelson.teamwork.utils;
 
+import android.text.TextUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +25,7 @@ public class DateTimeUtils {
         return dateToString(new Date(), TimeZone.getTimeZone("UTC"), DATE_FORMAT_2);
     }
 
-    public static  String getUpdateTimeNow() {
+    public static String getUpdateTimeNow() {
         return dateToString(new Date(), TimeZone.getTimeZone("UTC"), DATE_FORMAT_3);
     }
 
@@ -47,11 +49,13 @@ public class DateTimeUtils {
     }
 
     public static String stringToDateFormat1(String input, String format) {
+        if (TextUtils.isEmpty(input)) return "Unknown"; //Quick fix.
         return formatDateTime(serverStringToDate(input, TimeZone.getTimeZone("UTC"), DATE_FORMAT_1), format);
 
     }
 
     public static String stringToDateFormat2(String input, String format) {
+        if (TextUtils.isEmpty(input)) return "Unknown"; //Quick fix. Should be improved
         return formatDateTime(serverStringToDate(input, TimeZone.getTimeZone("UTC"), DATE_FORMAT_2), format);
 
     }
