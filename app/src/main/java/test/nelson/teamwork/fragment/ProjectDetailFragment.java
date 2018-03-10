@@ -74,7 +74,6 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
         if (getArguments() != null)
             projectId = getArguments().getLong(KEY_PROJECT_ID);
 
-
         return view;
     }
 

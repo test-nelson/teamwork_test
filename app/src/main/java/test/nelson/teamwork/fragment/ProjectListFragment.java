@@ -49,6 +49,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         ButterKnife.bind(this, view);
         setupToolbarWithTitle("Projects");
+        setupToolbarArrow();
 
 
         return view;

@@ -106,7 +106,7 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
             EventBus.getDefault().post(new ProjectSelectedEvent(project.getId()));
     }
 
-    static class ProjectItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class ProjectItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.text_view_item_project_view_holder_project_name)
         TextView projectName;
@@ -121,6 +121,7 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         @BindView(R.id.image_view_item_project_view_holder_star_button)
         ImageView starButton;
 
+
         private ProjectItemInteractionListener interactionListener;
         private RequestManager requestManager;
 
@@ -128,7 +129,6 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         ProjectItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
         }
 
         private void bindProjectInformation(Project project) {
@@ -166,6 +166,11 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
 
         }
 
+        @OnClick(R.id.project_view_holder_container)
+        public void onProjectItemSelected() {
+            interactionListener.onProjectSelected(getAdapterPosition());
+        }
+
         @OnClick(R.id.view_group_item_project_view_holder_expand_button)
         void onExpandButtonClicked() {
             interactionListener.onItemDescriptionExpanded(getAdapterPosition());
@@ -176,10 +181,6 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
             this.interactionListener = interactionListener;
         }
 
-        @Override
-        public void onClick(View v) {
-            interactionListener.onProjectSelected(getAdapterPosition());
-        }
 
         public void setRequestManager(RequestManager requestManager) {
             this.requestManager = requestManager;

@@ -75,6 +75,20 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
         }
     }
 
+
+    public void setupToolbarArrow() {
+        if (toolbar == null) return;
+        getBaseActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+    }
+
+
     BaseActivity getBaseActivity() {
         return (BaseActivity) getActivity();
     }
