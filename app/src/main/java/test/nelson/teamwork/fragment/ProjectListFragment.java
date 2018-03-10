@@ -89,6 +89,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     public void setProjects(RealmResults<Project> projects) {
         ProjectListAdapter adapter = new ProjectListAdapter(projects, Glide.with(this));
         setUpList(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), adapter);
+        setRecyclerViewAnimation();
         disableDefaultRecyclerViewAnimations();
 
     }

@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,6 +52,13 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
         if (recyclerView == null) return;
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void setRecyclerViewAnimation() {
+        if (recyclerView == null) return;
+        LayoutAnimationController animation = AnimationUtils.
+                loadLayoutAnimation(getContext(), R.anim.recycler_view_layout_enter_animation);
+        recyclerView.setLayoutAnimation(animation);
     }
 
     private void setupSwipeToRefresh() {
