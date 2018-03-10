@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:fitsSystemWindows="true"
     tools:context="test.nelson.teamwork.fragment.ProjectDetailFragment">
 
 
@@ -18,7 +17,6 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
@@ -128,9 +126,9 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                tools:text="Teamwork Inc"
                 android:textColor="#aa000000"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="Teamwork Inc" />
 
 
             <TextView
@@ -151,9 +149,9 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                tools:text="11 January 2013"
                 android:textColor="#aa000000"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="11 January 2013" />
 
 
             <TextView
@@ -174,9 +172,9 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                tools:text="12 August 2017"
                 android:textColor="#aa000000"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="12 August 2017" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -196,9 +194,9 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lineSpacingExtra="4sp"
-                tools:text="12 July 2017 - 30 April 2018"
                 android:textColor="#aa000000"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="12 July 2017 - 30 April 2018" />
 
 
             <View

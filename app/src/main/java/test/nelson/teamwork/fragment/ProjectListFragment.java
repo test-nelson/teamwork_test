@@ -96,7 +96,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
 
     @Override
     public void openProjectDetailFragment(long id) {
-        getBaseActivity().addFragment(ProjectDetailFragment.getInstance(id));
+        getBaseActivity().openFragment(ProjectDetailFragment.getInstance(id), true);
     }
 
     @Override

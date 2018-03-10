@@ -14,10 +14,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void openFragment(Fragment fragment, boolean addToBackStack, int enterRight, int exitLeft, int enterLeft, int exitRight) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(enterRight, exitLeft, enterLeft, exitRight);
-        transaction.replace(R.id.fragment_container, fragment);
+        transaction.add(R.id.fragment_container, fragment);
         if (addToBackStack) transaction.addToBackStack(null);
         getSupportFragmentManager().executePendingTransactions();
         transaction.commit();
+    }
+
+
+    public void openFragment(Fragment fragment, boolean addToBackStack) {
+        openFragment(fragment, addToBackStack, R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
     }
 
 

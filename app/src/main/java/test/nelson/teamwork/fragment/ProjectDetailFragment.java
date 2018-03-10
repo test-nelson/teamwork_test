@@ -163,13 +163,11 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
     @Override
     public void starProject() {
         starButton.setImageResource(R.drawable.ic_star_white_24dp);
-        showMessage("Project starred!");
     }
 
     @Override
     public void unstarProject() {
         starButton.setImageResource(R.drawable.ic_star_border_black_24dp);
-        showMessage("Project un-starred!");
     }
 
     @Override
