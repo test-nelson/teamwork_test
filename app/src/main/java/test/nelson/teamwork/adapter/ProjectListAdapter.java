@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,9 +35,11 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
 
     private HashSet<Integer> expandedIndices = new HashSet<>();
     private RecyclerView recyclerView;
+    private RequestManager requestManager;
 
-    public ProjectListAdapter(@Nullable OrderedRealmCollection<Project> data) {
+    public ProjectListAdapter(@Nullable OrderedRealmCollection<Project> data, RequestManager requestManager) {
         super(data, true);
+        this.requestManager = requestManager;
     }
 
     @NonNull
@@ -50,6 +53,7 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
     @Override
     public void onBindViewHolder(@NonNull ProjectItemViewHolder holder, int position) {
         holder.setInteractionListener(this);
+        holder.setRequestManager(requestManager);
         holder.bindProjectInformation(getItem(position));
     }
 
@@ -118,6 +122,7 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         ImageView starButton;
 
         private ProjectItemInteractionListener interactionListener;
+        private RequestManager requestManager;
 
 
         ProjectItemViewHolder(View itemView) {
@@ -130,8 +135,11 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
             projectName.setText(project.getName());
             projectSubtitle.setText(project.getCompany().getName());
             projectDescription.setText(project.getDescription());
-            Glide.with(itemView.getContext())
-                    .load(project.getLogo())
+
+            requestManager.load(project.getLogo())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.project_place_holder)
+                            .error(R.drawable.project_place_holder))
                     .into(projectLogo);
 
             if (project.isStarred())
@@ -171,6 +179,10 @@ public class ProjectListAdapter extends RealmRecyclerViewAdapter<Project, Projec
         @Override
         public void onClick(View v) {
             interactionListener.onProjectSelected(getAdapterPosition());
+        }
+
+        public void setRequestManager(RequestManager requestManager) {
+            this.requestManager = requestManager;
         }
     }
 

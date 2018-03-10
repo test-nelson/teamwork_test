@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -85,7 +87,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
 
     @Override
     public void setProjects(RealmResults<Project> projects) {
-        ProjectListAdapter adapter = new ProjectListAdapter(projects);
+        ProjectListAdapter adapter = new ProjectListAdapter(projects, Glide.with(this));
         setUpList(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false), adapter);
         disableDefaultRecyclerViewAnimations();
 

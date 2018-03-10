@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,6 +118,9 @@ public class ProjectDetailFragment extends BaseFragment implements ProjectDetail
     public void setLogo(String logo) {
         Glide.with(this)
                 .load(logo)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.project_place_holder)
+                        .error(R.drawable.project_place_holder))
                 .into(projectLogo);
     }
 
