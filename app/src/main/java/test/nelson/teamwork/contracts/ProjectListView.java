@@ -13,4 +13,10 @@ public interface ProjectListView {
     void stopRefreshing();
 
     void openProjectDetailFragment(long id);
+
+    void startRefreshing();
+
+    void showEmptyProjectsView();
+
+    void showProjectsView();
 }

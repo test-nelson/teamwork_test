@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
 import test.nelson.teamwork.R;
@@ -29,7 +30,10 @@ import test.nelson.teamwork.utils.CustomLinearLayoutManager;
 public class ProjectListFragment extends BaseFragment implements ProjectListView {
 
 
-    private ProjectListPresenter presenter;
+    private ProjectListPresenter presenter = new ProjectListPresenter();
+
+    @BindView(R.id.empty_projects_layout)
+    View emptyProjectsLayout;
 
     public ProjectListFragment() {
         // Required empty public constructor
@@ -42,8 +46,6 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         ButterKnife.bind(this, view);
-        startRefreshing();
-        presenter = new ProjectListPresenter(this);
         setupToolbarWithTitle("Projects");
 
 
@@ -66,7 +68,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.onViewCreated();
+        presenter.onViewCreated(this);
     }
 
     @Override
@@ -94,9 +96,22 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
         getBaseActivity().addFragment(ProjectDetailFragment.getInstance(id));
     }
 
+    @Override
+    public void showEmptyProjectsView() {
+        emptyProjectsLayout.setVisibility(View.VISIBLE);
+        if (recyclerView != null)
+            recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProjectsView() {
+        emptyProjectsLayout.setVisibility(View.GONE);
+        if (recyclerView != null)
+            recyclerView.setVisibility(View.VISIBLE);
+    }
+
     @Subscribe
     public void onProjectSelectedEvent(ProjectSelectedEvent event) {
-
         presenter.onProjectSelectedEvent(event);
     }
 

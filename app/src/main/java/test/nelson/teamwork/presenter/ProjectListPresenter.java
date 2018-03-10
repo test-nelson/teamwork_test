@@ -1,27 +1,32 @@
 package test.nelson.teamwork.presenter;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import test.nelson.teamwork.contracts.ProjectListView;
+import test.nelson.teamwork.model.Project;
 import test.nelson.teamwork.model.ProjectSelectedEvent;
 
 /**
  * Created by nelsonnwezeaku on 3/7/18.
  */
 
-public class ProjectListPresenter extends BasePresenter{
+public class ProjectListPresenter extends BasePresenter {
     private ProjectListView view;
     private Realm realm;
 
 
-    public ProjectListPresenter(ProjectListView view) {
-        this.view = view;
+    public ProjectListPresenter() {
         repository.downloadProjects();
     }
 
 
-    public void onViewCreated() {
+    public void onViewCreated(ProjectListView view) {
+        this.view = view;
         realm = Realm.getDefaultInstance();
-        view.setProjects(cacheHelper.getProjects(realm));
+        final RealmResults<Project> projects = cacheHelper.getProjects(realm);
+        if (projects.isEmpty())
+            view.startRefreshing();
+        view.setProjects(projects);
     }
 
 
@@ -34,6 +39,11 @@ public class ProjectListPresenter extends BasePresenter{
     }
 
     public void onProjectsUpdated() {
+
+        if (cacheHelper.getProjects(realm).isEmpty())
+            view.showEmptyProjectsView();
+        else view.showProjectsView();
+
         view.stopRefreshing();
     }
 
