@@ -4,7 +4,8 @@ import io.realm.Realm;
 import test.nelson.teamwork.contracts.ProjectDetailView;
 import test.nelson.teamwork.model.Project;
 
-import static test.nelson.teamwork.utils.DateTimeUtils.DATE_FORMAT_SHORT;
+
+import static test.nelson.teamwork.utils.Config.DATE_FORMAT_SHORT;
 import static test.nelson.teamwork.utils.DateTimeUtils.stringToDateFormat1;
 import static test.nelson.teamwork.utils.DateTimeUtils.stringToDateFormat2;
 

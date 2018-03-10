@@ -8,17 +8,15 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static test.nelson.teamwork.utils.Config.DATE_FORMAT_1;
+import static test.nelson.teamwork.utils.Config.DATE_FORMAT_2;
+import static test.nelson.teamwork.utils.Config.DATE_FORMAT_3;
+
 /**
  * Created by nelsonnwezeaku on 3/9/18.
  */
 
 public class DateTimeUtils {
-
-    public static final String DATE_FORMAT_1 = "yyyy-dd-mm'T'HH:mm:ss";
-    public static final String DATE_FORMAT_2 = "yyyyMMdd";
-    public static final String DATE_FORMAT_3 = "HH:mm";
-
-    public static final String DATE_FORMAT_SHORT = "dd MMM yyyy";
 
 
     public static String getUpdateDateNow() {
