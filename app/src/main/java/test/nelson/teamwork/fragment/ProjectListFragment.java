@@ -68,6 +68,12 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter.onCreate();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.onViewCreated();
@@ -80,9 +86,9 @@ public class ProjectListFragment extends BaseFragment implements ProjectListView
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        presenter.onViewDestroyed();
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 
     @Override

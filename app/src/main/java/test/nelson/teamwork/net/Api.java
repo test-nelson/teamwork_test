@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import test.nelson.teamwork.model.ProjectListResponse;
 import test.nelson.teamwork.model.StarProjectStatus;
 
@@ -14,7 +15,10 @@ import test.nelson.teamwork.model.StarProjectStatus;
 public interface Api {
 
     @GET("projects.json")
-    public Observable<ProjectListResponse> getProjects();
+    Observable<ProjectListResponse> getProjects(
+            @Query("createdAfterDate") String afterDate,
+            @Query("createdAfterTime") String afterTime);
+
 
     @PUT("projects/{project_id}/star.json")
     Observable<StarProjectStatus> starProject(@Path("project_id") long projectId);

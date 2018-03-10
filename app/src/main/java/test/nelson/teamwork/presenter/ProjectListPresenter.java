@@ -17,12 +17,17 @@ public class ProjectListPresenter extends BasePresenter {
 
     public ProjectListPresenter(ProjectListView view) {
         this.view = view;
-        repository.downloadProjects(view);
+
     }
 
 
-    public void onViewCreated() {
+    public void onCreate() {
         realm = Realm.getDefaultInstance();
+        repository.downloadProjects(realm, view);
+    }
+
+    public void onViewCreated() {
+
         final RealmResults<Project> projects = cacheHelper.getProjects(realm);
         if (projects.isEmpty())
             view.startRefreshing();
@@ -30,12 +35,12 @@ public class ProjectListPresenter extends BasePresenter {
     }
 
 
-    public void onViewDestroyed() {
+    public void onDestroy() {
         realm.close();
     }
 
     public void onSwipeToRefresh() {
-        repository.downloadProjects(view);
+        repository.downloadProjects(realm, view);
     }
 
     public void onProjectsUpdated() {
@@ -54,4 +59,5 @@ public class ProjectListPresenter extends BasePresenter {
     public void onNetworkError() {
         onProjectsUpdated();
     }
+
 }

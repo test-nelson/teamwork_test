@@ -1,6 +1,7 @@
 package test.nelson.teamwork.persistence;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -11,6 +12,7 @@ import io.realm.Realm.Transaction;
 import io.realm.RealmResults;
 import test.nelson.teamwork.model.Project;
 import test.nelson.teamwork.model.ProjectsUpdatedEvent;
+import test.nelson.teamwork.model.UserInfo;
 
 /**
  * Created by nelsonnwezeaku on 3/7/18.
@@ -60,6 +62,24 @@ public class CacheHelper {
             public void execute(@NonNull Realm realm) {
                 realm.copyToRealmOrUpdate(project);
                 EventBus.getDefault().post(new ProjectsUpdatedEvent());
+            }
+        });
+    }
+
+    @Nullable
+    public UserInfo getUserInfo(Realm realm) {
+        UserInfo info = realm.where(UserInfo.class).findFirst();
+        if (info != null) {
+            return realm.copyFromRealm(info);
+        }
+        return null;
+    }
+
+    public void updateProjectParams(final UserInfo info) {
+        executeTransactionAndClose(new Transaction() {
+            @Override
+            public void execute(@NonNull Realm realm) {
+                realm.copyToRealmOrUpdate(info);
             }
         });
     }

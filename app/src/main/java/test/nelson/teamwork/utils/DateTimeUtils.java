@@ -13,10 +13,19 @@ import java.util.TimeZone;
 public class DateTimeUtils {
 
     public static final String DATE_FORMAT_1 = "yyyy-dd-mm'T'HH:mm:ss";
-    public static final String DATE_FORMAT_2 = "yyyymmdd";
+    public static final String DATE_FORMAT_2 = "yyyyMMdd";
+    public static final String DATE_FORMAT_3 = "HH:mm";
 
     public static final String DATE_FORMAT_SHORT = "dd MMM yyyy";
 
+
+    public static String getUpdateDateNow() {
+        return dateToString(new Date(), TimeZone.getTimeZone("UTC"), DATE_FORMAT_2);
+    }
+
+    public static  String getUpdateTimeNow() {
+        return dateToString(new Date(), TimeZone.getTimeZone("UTC"), DATE_FORMAT_3);
+    }
 
     private static Date serverStringToDate(String input, TimeZone timeZone, String format) {
         SimpleDateFormat sourceFormat = new SimpleDateFormat(format, Locale.getDefault());

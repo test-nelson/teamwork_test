@@ -19,8 +19,8 @@ public class ApiService {
         api = RetrofitProvider.getInstance().getRetrofit(username, password).create(Api.class);
     }
 
-    public void getProjects(CallbackWrapper<ProjectListResponse> observer) {
-        subscribeObserver(api.getProjects(), observer);
+    public void getProjects(String afterDate, String afterTime, CallbackWrapper<ProjectListResponse> observer) {
+        subscribeObserver(api.getProjects(afterDate, afterTime), observer);
     }
 
     public void starProject(long projectId, CallbackWrapper<StarProjectStatus> observer) {

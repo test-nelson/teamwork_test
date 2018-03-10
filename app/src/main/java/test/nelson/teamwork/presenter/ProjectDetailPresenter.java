@@ -46,7 +46,11 @@ public class ProjectDetailPresenter extends BasePresenter {
         view.setActivityState(PROJECT_STATUS_ACTIVE.equals(project.getStatus()));
         view.setTimersEnabled(project.isHarvestTimersEnabled());
         view.setReplyByEmailEnabled(project.isReplyByEmailEnabled());
-        setProjectStarStatus();
+
+        if (project.isStarred())
+            view.starProject();
+        else
+            view.unstarProject();
 
 
     }
