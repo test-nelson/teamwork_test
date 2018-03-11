@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply plugin: 'android-string-extractor'
 
 android {
     compileSdkVersion 27

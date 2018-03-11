@@ -1,63 +1,232 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:background="#ffffff" android:layout_height="match_parent" android:layout_width="match_parent" tools:context="test.nelson.teamwork.fragment.ProjectDetailFragment">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="test.nelson.teamwork.fragment.ProjectDetailFragment">
 
 
-    <android.support.design.widget.AppBarLayout android:id="@+id/app_bar_layout" android:layout_height="wrap_content" android:layout_width="match_parent" app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.design.widget.CollapsingToolbarLayout android:layout_height="match_parent" android:layout_width="match_parent" app:contentScrim="?attr/colorPrimary" app:expandedTitleMarginEnd="64dp" app:expandedTitleMarginStart="48dp" app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView android:fitsSystemWindows="true" android:id="@+id/image_view_fragment_project_detail_project_logo" android:layout_height="232dp" android:layout_width="match_parent" android:scaleType="centerCrop" app:layout_collapseMode="parallax"/>
+            <ImageView
+                android:id="@+id/image_view_fragment_project_detail_project_logo"
+                android:layout_width="match_parent"
+                android:layout_height="232dp"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
 
-            <android.support.v7.widget.Toolbar android:id="@+id/toolbar" android:layout_height="?attr/actionBarSize" android:layout_width="match_parent" app:layout_collapseMode="pin" app:layout_scrollFlags="scroll|enterAlways" app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab_fragment_project_detail_star_button" android:layout_height="wrap_content" android:layout_marginEnd="16dp" android:layout_width="wrap_content" android:src="@drawable/ic_star_border_black_24dp" app:layout_anchor="@id/app_bar_layout" app:layout_anchorGravity="bottom|right|end"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_fragment_project_detail_star_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|right|end" />
 
 
-    <android.support.v4.widget.NestedScrollView android:clipToPadding="false" android:layout_height="match_parent" android:layout_width="match_parent" android:paddingBottom="16dp" android:paddingTop="16dp" app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout android:animateLayoutChanges="true" android:layout_height="match_parent" android:layout_marginBottom="16dp" android:layout_marginEnd="16dp" android:layout_marginStart="40dp" android:layout_width="match_parent" android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="40dp"
+            android:animateLayoutChanges="true"
 
-            <LinearLayout android:layout_height="wrap_content" android:layout_marginTop="32dp" android:layout_width="match_parent" android:orientation="horizontal">
+            android:orientation="vertical">
 
-                <TextView android:ellipsize="end" android:fontFamily="sans-serif-medium" android:layout_height="wrap_content" android:layout_width="wrap_content" android:maxLines="16" android:text="Project Description" android:textColor="@color/colorAccent" android:textSize="14sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal">
 
-                <ImageView android:alpha="0.5" android:layout_gravity="center" android:layout_height="16dp" android:layout_marginStart="2dp" android:layout_width="16dp" android:src="@drawable/ic_mode_edit_black_24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:maxLines="16"
+                    android:text="Project Description"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/ic_mode_edit_black_24dp" />
             </LinearLayout>
 
 
-            <TextView android:ellipsize="end" android:id="@+id/text_view_fragment_project_detail_project_description" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:layout_width="wrap_content" android:lineSpacingExtra="4sp" android:maxLines="16" android:textColor="#aa000000" android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/text_view_fragment_project_detail_project_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="4sp"
+                android:maxLines="16"
+                android:textColor="#aa000000"
+                android:textSize="12sp" />
 
 
-            <TextView android:ellipsize="end" android:fontFamily="sans-serif-medium" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:layout_width="wrap_content" android:maxLines="16" android:text="Company" android:textColor="@color/colorAccent" android:textSize="14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="16"
+                android:text="Company"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
 
-            <TextView android:ellipsize="end" android:id="@+id/text_view_fragment_project_detail_project_company" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:lineSpacingExtra="4sp" android:textColor="#aa000000" android:textSize="12sp" tools:text="Teamwork Inc"/>
-
-
-            <TextView android:ellipsize="end" android:fontFamily="sans-serif-medium" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:layout_width="wrap_content" android:maxLines="16" android:text="Created" android:textColor="@color/colorAccent" android:textSize="14sp"/>
-
-            <TextView android:ellipsize="end" android:id="@+id/text_view_fragment_project_detail_created" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:lineSpacingExtra="4sp" android:textColor="#aa000000" android:textSize="12sp" tools:text="11 January 2013"/>
-
-
-            <TextView android:ellipsize="end" android:fontFamily="sans-serif-medium" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:layout_width="wrap_content" android:maxLines="16" android:text="Last modified" android:textColor="@color/colorAccent" android:textSize="14sp"/>
-
-            <TextView android:ellipsize="end" android:id="@+id/text_view_fragment_project_detail_last_modified" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:lineSpacingExtra="4sp" android:textColor="#aa000000" android:textSize="12sp" tools:text="12 August 2017"/>
-
-            <TextView android:ellipsize="end" android:fontFamily="sans-serif-medium" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:layout_width="wrap_content" android:maxLines="16" android:text="Period" android:textColor="@color/colorAccent" android:textSize="14sp"/>
-
-            <TextView android:ellipsize="end" android:id="@+id/text_view_fragment_project_detail_period" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:lineSpacingExtra="4sp" android:textColor="#aa000000" android:textSize="12sp" tools:text="12 July 2017 - 30 April 2018"/>
-
-
-            <View android:background="#30000000" android:layout_height="1dp" android:layout_marginBottom="8dp" android:layout_marginTop="32dp" android:layout_width="match_parent"/>
-
-
-            <Button android:id="@+id/button_fragment_project_detail_show_project_misc_settings" android:layout_gravity="center_horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/fragment_project_detail_button_fragment_project_detail_show_project_misc_settings_text" style="?attr/borderlessButtonStyle"/>
+            <TextView
+                android:id="@+id/text_view_fragment_project_detail_project_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="4sp"
+                android:textColor="#aa000000"
+                android:textSize="12sp"
+                tools:text="Teamwork Inc" />
 
 
-            <include android:id="@+id/view_group_fragment_project_detail_project_misc_settings" android:layout_height="match_parent" android:layout_marginBottom="16dp" android:layout_marginTop="32dp" android:layout_width="match_parent" android:visibility="gone" layout="@layout/layout_project_misc_settings"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="16"
+                android:text="Created"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_view_fragment_project_detail_created"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="4sp"
+                android:textColor="#aa000000"
+                android:textSize="12sp"
+                tools:text="11 January 2013" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="16"
+                android:text="Last modified"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_view_fragment_project_detail_last_modified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="4sp"
+                android:textColor="#aa000000"
+                android:textSize="12sp"
+                tools:text="12 August 2017" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="16"
+                android:text="Period"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/text_view_fragment_project_detail_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="4sp"
+                android:textColor="#aa000000"
+                android:textSize="12sp"
+                tools:text="12 July 2017 - 30 April 2018" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="32dp"
+                android:background="#30000000" />
+
+
+            <Button
+                android:id="@+id/button_fragment_project_detail_show_project_misc_settings"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Show all settings" />
+
+
+            <include
+                android:id="@+id/view_group_fragment_project_detail_project_misc_settings"
+                layout="@layout/layout_project_misc_settings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="32dp"
+                android:visibility="gone"
+
+                />
 
 
         </LinearLayout>
